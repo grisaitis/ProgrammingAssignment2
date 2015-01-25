@@ -1,9 +1,6 @@
 ## These functions provide a framework for managing the computation of inverting
 # a matrix.
 
-## Put comments here that give an overall description of what your
-## functions do
-
 ## this function returns a list of functions for managing the  inversion of a
 # matrices. It's sort of like defining a class (with attributes and methods),
 # but R doesn't have class definitions, and this is the next best thing.
