@@ -1,16 +1,20 @@
 ## These functions provide a framework for managing the computation of inverting
-# a matrix.
+# a matrix. The nice functionality this offers is that it prevents redundant
+# computation. In other words, if you've already calculated the inverse of a
+# matrix, these functions save that result and, when you want the inverse at
+# some later point in time, these functions return the already-computed result,
+# instead of recalculating the solution.
 
 
 ## The makeCacheMatrix() function returns a list of functions for managing the
-# inversion of a matrix. It's sort of like defining a class (with attributes
-# and methods), but R doesn't have class definitions, and this is the next best
-# thing.
+# inversion of a matrix.
 # The specific methods this list has are:
 # * get() - returns the matrix you want to invert
 # * set(y) - changes the matrix you want to invert, to y (a matrix object)
 # * getSolution() - returns the inverse of the matrix, if stored.
 # * setSolution(newSolution) - changes the stored inverse of the matrix
+# This function is similar to defining a class (with attributes and methods).
+# Since R doesn't have class definitions, we use this approach instead.
 
 makeCacheMatrix <- function(x = matrix()) {
     # initialize a variable that will contain the inverse of X
@@ -31,7 +35,7 @@ makeCacheMatrix <- function(x = matrix()) {
     getSolution = function() {
         solution # return the inverse of X, as currently stored
     }
-    
+
     # return a list object containing these methods
     list(set = set
         ,get = get
