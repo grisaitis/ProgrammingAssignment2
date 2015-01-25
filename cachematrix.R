@@ -1,5 +1,5 @@
 ## These functions provide a framework for managing the computation of inverting
-# a matrix. 
+# a matrix.
 
 
 ## The makeCacheMatrix() function returns a list of functions for managing the
@@ -22,10 +22,10 @@ makeCacheMatrix <- function(x = matrix()) {
     get = function() {
         x # return the matrix X
     }
-    setSolution <- function(newSolution) {
+    setSolution = function(newSolution) {
         solution <<- newSolution # store a new inverse of X
     }
-    getSolution <- function() {
+    getSolution = function() {
         solution # return the inverse of X, as currently stored
     }
     list(set = set
@@ -36,16 +36,27 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## This function returns the inverse of a matrix, using a makeCacheMatrix()
+# return object. It's useful in that it abstracts away the operations of either
+# computing the solution or loading a cached solution that was computed
+# previously. It automates this by first asking: is there a cached solution?
+# In other words: has the matrix already been inverted? If yes, it stops there
+# and returns the cached result that was computed in the past. If not, it
+# computes the inverse, caches this solution in the "matrix object", and
+# returns the solution (i.e. the matrix inverse).
 
 cacheSolve <- function(x, ...) {
+    # returns the inverse of the matrix stored in x.
+    # x must be an object returned by makeCacheMatrix().
+    # the additional arguments (`...`) are arguments for the built-in solve()
+    # function in R.
     solution = x$getSolution()
     if(!is.null(solution)) {
         message("getting cached data")
         return(solution)
     }
-    data <- x$get()
-    solution <- solve(data, ...)
+    xValue = x$get()
+    solution = solve(xValue, ...)
     x$setSolution(solution)
     solution
 }
