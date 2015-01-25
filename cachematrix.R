@@ -51,12 +51,19 @@ cacheSolve <- function(x, ...) {
     # the additional arguments (`...`) are arguments for the built-in solve()
     # function in R.
     solution = x$getSolution()
+    # check if the matrix inverse has already been calculated
     if(!is.null(solution)) {
+        # if yes, then return the cached answer
         message("getting cached data")
         return(solution)
     }
+    # otherwise, calculate the inverse, which involves...
+    # get the matrix we want to invert
     xValue = x$get()
+    # invert the matrix
     solution = solve(xValue, ...)
+    # cache the result
     x$setSolution(solution)
+    # return the result
     solution
 }
