@@ -13,7 +13,10 @@
 # * setSolution(newSolution) - changes the stored inverse of the matrix
 
 makeCacheMatrix <- function(x = matrix()) {
+    # initialize a variable that will contain the inverse of X
     solution = NULL
+
+    # create methods for getting/setting the matrix X and the inverse of X.
     set = function(y) {
         # syntax note: double arrows change the variable in the parent namespace
         x <<- y # assign a new matrix to X
@@ -28,6 +31,8 @@ makeCacheMatrix <- function(x = matrix()) {
     getSolution = function() {
         solution # return the inverse of X, as currently stored
     }
+    
+    # return a list object containing these methods
     list(set = set
         ,get = get
         ,setSolution = setSolution
